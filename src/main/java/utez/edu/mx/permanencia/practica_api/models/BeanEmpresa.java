@@ -3,6 +3,8 @@ package utez.edu.mx.permanencia.practica_api.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -15,6 +17,9 @@ public class BeanEmpresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+
+    private String uuid;
 
     @Column(name = "razon_social", length = 32)
     private String razonSocial;
@@ -30,5 +35,10 @@ public class BeanEmpresa {
 
     @Column(name = "email", length = 32)
     private String email;
+
+    @PrePersist
+    protected void onCreate(){
+        this.uuid = String.valueOf(UUID.randomUUID());
+    }
 
 }

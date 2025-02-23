@@ -9,22 +9,18 @@ import utez.edu.mx.permanencia.practica_api.config.exceptions.UnauthorizedExcept
 
 @RestController("api/")
 public class ExceptionController {
-    @GetMapping("/unauthorized")
-    public void throwUnauthorized() {
-        throw new UnauthorizedException("No tienes permiso para acceder a este recurso.");
-    }
 
     @GetMapping("/exception/{exceptionType}")
     public void throwException(@PathVariable String exceptionType) {
         switch (exceptionType) {
             case "unauthorized":
-                throw new UnauthorizedException("No tienes permiso para acceder a este recurso.");
+                throw new UnauthorizedException("No tienes permiso para acceder a este recurso -> CODIGO DE ERROR: E-401");
             case "notFound":
-                throw new ResourceNotFoundException("Recurso no encontrado");
+                throw new ResourceNotFoundException("Recurso no encontrado -> CODIGO DE ERROR: E-404");
             case "badRequest":
-                throw new CustomBadRequestException("Petición incorrecta");
+                throw new CustomBadRequestException("Petición incorrecta -> CODIGO DE ERROR: E-400");
             default:
-                throw new RuntimeException("Error desconocido");
+                throw new RuntimeException("Error desconocido -> CODIGO DE ERROR: E-500");
 
         }
     }
